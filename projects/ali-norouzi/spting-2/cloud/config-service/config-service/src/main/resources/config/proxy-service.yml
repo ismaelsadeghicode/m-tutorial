@@ -1,0 +1,20 @@
+server:
+  port: 8085
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka
+zuul:
+  routes:
+    customer:
+      path: /customer-service/**
+      serviceId: customer-service
+    airline:
+      path: /customer-service/**
+      serviceId: customer-service
+    webClient:
+      path: /web-client-service/**
+      serviceId: web-client-service
+    webServer:
+      path: /web-server-service/**
+      serviceId: web-server-service

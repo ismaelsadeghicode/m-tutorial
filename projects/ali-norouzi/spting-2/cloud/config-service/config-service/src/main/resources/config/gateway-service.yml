@@ -1,0 +1,38 @@
+server:
+  port: 8084
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka/
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: customer-service
+          uri: lb://customer-service
+          predicates:
+            - Path=/customer/**
+          filters:
+            - RewritePath=/customer/(?<path>.*), /$\{path}
+        - id: airline-service
+          uri: lb://airline-service
+          predicates:
+            - Path=/airline/**
+          filters:
+            - RewritePath=/airline/(?<path>.*), /$\{path}
+        - id: web-client-service
+          uri: lb://web-client-service
+          predicates:
+            - Path=/web-client/**
+          filters:
+            - RewritePath=/web-client/(?<path>.*), /$\{path}
+        - id: web-server-service
+          uri: lb://web-server-service
+          predicates:
+            - Path=/web-server/**
+          filters:
+            - RewritePath=/web-server/(?<path>.*), /$\{path}

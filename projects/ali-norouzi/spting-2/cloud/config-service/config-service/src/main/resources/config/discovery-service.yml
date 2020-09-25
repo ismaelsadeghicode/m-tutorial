@@ -1,0 +1,10 @@
+server:
+  port: 8083
+eureka:
+  instace:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fethRegistry: false
+    serviceUrl:
+      defa ultZone: http://${eureka.instace.hostname}:${server.port}/eureka
